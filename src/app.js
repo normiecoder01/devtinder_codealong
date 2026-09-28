@@ -7,17 +7,21 @@ http://localhost:6969/user/007/normiecoder/true
 // http://localhost:6969/user/007/normiecoder/
 // By putting the incognito in curly braces, we have made it optional
 
-app.get("/user/:userId/:username{/:incognito}",(req , res) =>{
-    res.send(req.params)
-})
+// app.get("/user/:userId/:username{/:incognito}",(req , res) =>{
+//     res.send(req.params)
+// })
 
 // http://localhost:6969/user/?userId=007&username=normiecoder
 // clearly everything is optional here
-app.get("/user",(req , res) =>{
-   res.send(req.query) 
-})
+// app.get("/user",(req , res) =>{
+//    res.send(req.query) 
+// })
 
-app.get("/user",(req , res) =>{
+app.get("/user",(req , res, next) =>{
+    console.log("In the first handler")
+    next()
+}, (req , res) =>{
+    console.log("In the second handler")
     res.send("Assume this is some user data")
 })
 
